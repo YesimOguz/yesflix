@@ -18,10 +18,15 @@
 
         <div class="tv-details">
           <div class="img-container">
-            <img :src="tvShow.image.original" class="img" :alt="tvShow.name" />
+            <img
+              v-if="tvShow.image"
+              :src="tvShow.image.original"
+              class="img"
+              :alt="tvShow.name"
+            />
           </div>
 
-          <div class="tv-content">
+          <div v-if="tvShow && tvShow.rating" class="tv-content">
             <h2 class="tv-title">{{ tvShow.name }}</h2>
             <p class="tv-rating">{{ tvShow.rating.average }}/10</p>
             <p class="tv-summary">{{ tvShow.summary }}</p>
@@ -37,9 +42,15 @@
 </template>
 
 <script>
+// import { mapState } from "vuex";
 export default {
   name: "DetailsModal",
   props: { tvShow: { type: Object } },
+  //   computed: {
+  //     ...mapState({
+  //       tvShow: (state) => state.TvShow.tvShow,
+  //     }),
+  //   },
   methods: {
     close() {
       this.$emit("close");

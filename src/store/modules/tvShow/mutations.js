@@ -4,5 +4,8 @@ export default {
     },
     setTvShows(state, tvShows){
         state.tvShows = tvShows
+    },
+    setTvShow(state, tvShow){
+        state.tvShow = tvShow
     }
 };

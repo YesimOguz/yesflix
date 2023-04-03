@@ -1,61 +1,62 @@
 <template>
   <div class="tvShow-card">
-    <router-link
-      :to="{ name: 'tvShowDetails', params: { id: tvShow.show.id } }"
-    >
-      <img
-        :src="tvShow.show.image.medium"
-        class="img"
-        :alt="tvShow.show.name"
-      />
-    </router-link>
-    <input
-      class="rating"
-      max="5"
-      oninput="this.style.setProperty('--value', `${tvShow.show.rating}`)"
-      step="0.5"
-      style="--value: 2.5"
-      type="range"
-      value="2.5"
+    <img
+      v-if="tvShow.image"
+      @click="clickImage(tvShow)"
+      :src="tvShow.image.medium"
+      class="img"
+      :alt="tvShow.name"
+      :data-index="dataIndex || null"
+      :class="classForCarousel || {}"
     />
+    <VueStarRating
+      v-if="tvShow.rating"
+      :rating="tvShow.rating.average / 2"
+      :read-only="true"
+      :increment="0.01"
+      :star-size="30"
+      :show-rating="false"
+      class="star-rating"
+    ></VueStarRating>
   </div>
 </template>
 
 <script>
+import VueStarRating from "vue-star-rating";
 export default {
+  components: { VueStarRating },
   props: {
+    dataIndex: { type: Number, required: false },
+    classForCarousel: { required: false, type: Object, default: () => ({}) },
     tvShow: {
       type: Object,
       default: () => ({
-        show: {
-          id: null,
-          image: null,
-          rating: null,
-        },
+        id: null,
+        image: null,
+        rating: null,
       }),
+    },
+  },
+  methods: {
+    clickImage(tvShow) {
+      console.log("emitting");
+      this.$store.dispatch("getTvShow", tvShow.id);
+      this.$emit("clickedImage", tvShow);
     },
   },
 };
 </script>
 
 <style lang="scss">
-.tvShow-card {
-  position: relative;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-
-  &:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-  }
-
-  .img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
+.img {
+  width: 100%;
+  height: 442px;
+  left: 0;
+}
+.star-rating {
+  //position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
 }
 </style>

@@ -3,13 +3,12 @@
   <div v-else-if="!tvShows.length">No Tv Shows found!</div>
   <div v-else>
     <TvShowsCarouselByGenre
-      @clickedImage="showModal"
+      @imageIsClicked="showModal"
       v-for="genre in genres"
       :key="genre"
       :title="genre"
       :tvShows="tvShowsByGenre(genre)"
     />
-    <!-- <button type="button" class="btn" @click="showModal">Open Modal!</button> -->
     <DetailsModal
       v-show="isModalVisible"
       @close="closeModal"
@@ -26,7 +25,11 @@ import DetailsModal from "../components/DetailsModal.vue";
 import { mapState } from "vuex";
 
 export default {
-  components: { TvShowsCarouselByGenre, SearchLoader, DetailsModal },
+  components: {
+    TvShowsCarouselByGenre,
+    SearchLoader,
+    DetailsModal,
+  },
   data() {
     return {
       genres: [

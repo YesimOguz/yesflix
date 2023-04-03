@@ -7,6 +7,12 @@ export default {
              commit('setTvShows', response.data)
             })
     },
+    getTvShow({ commit }, id) {
+        api.get(`shows/${id}`)
+           .then((response) => {
+             commit('setTvShow', response.data)
+            })
+    },
     searchTvShows({ commit }, query) {
         api.get(`search/shows?q=${query}`)
            .then((response) => {

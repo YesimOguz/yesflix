@@ -3,7 +3,6 @@ import App from './App.vue'
 import Carousel3d from 'vue-carousel-3d';
 import router from './router'
 import store from './store'
-// import Router from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueStarRating from "vue-star-rating";
@@ -11,7 +10,6 @@ import VueStarRating from "vue-star-rating";
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
-// Vue.use(Router)
 Vue.use(Carousel3d)
 Vue.component('star-rating', VueStarRating.default)
 

@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <!-- <router-view></router-view> -->
-    <HomePage />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import HomePage from "./views/HomePage.vue";
 
 export default {
   name: "App",
-  components: { HomePage, NavBar },
+  components: { NavBar },
 };
 </script>
 
@@ -24,9 +22,4 @@ body {
   width: 100%;
   height: 100%;
 }
-
-/* #app {
-  width: 100%;
-  height: 100%;
-} */
 </style>

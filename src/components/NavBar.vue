@@ -36,6 +36,10 @@ export default {
       if (this.search) {
         this.searchTimer = setTimeout(() => {
           this.$store.dispatch("searchTvShows", this.search);
+          this.$router.push({
+            name: "searchedTvShows",
+            params: { name: this.search },
+          });
         }, 1000);
       }
     },
@@ -54,7 +58,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   display: flex;
   justify-content: space-between;

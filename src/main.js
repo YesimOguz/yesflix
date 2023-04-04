@@ -6,11 +6,13 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueStarRating from "vue-star-rating";
+import Notifications from 'vue-notification'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
 Vue.use(Carousel3d)
+Vue.use(Notifications)
 Vue.component('star-rating', VueStarRating.default)
 
 

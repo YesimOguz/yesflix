@@ -15,12 +15,15 @@
           src="../assets/icons/searchIcon.svg"
         />
       </div>
-      <p>Logout</p>
+      <button v-if="user" @click="$store.dispatch('logout')" class="logout">
+        Logout
+      </button>
     </div>
   </header>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -43,6 +46,11 @@ export default {
         }, 1000);
       }
     },
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.Auth.user,
+    }),
   },
   methods: {
     toggleSearch() {
@@ -106,14 +114,97 @@ img {
   cursor: pointer;
   z-index: 1;
 }
+.logout {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #ffffff;
+  margin: 0 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  // Hover styles
+  &:hover {
+    color: #ff0000;
+  }
+}
 
 @media only screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+
   .link {
-    font-size: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   .search {
     padding-left: 2rem;
+    width: 15rem;
+    transition: none; // remove transition effect on smaller screens
+  }
+
+  img {
+    left: 1rem;
   }
 }
+
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 1rem;
+//   color: #ffffff;
+//   position: relative;
+// }
+
+// .link {
+//   font-size: 1.5rem;
+//   font-weight: bold;
+//   text-decoration: none;
+//   color: #ff0000;
+// }
+
+// .search-logout {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .search-bar {
+//   position: relative;
+// }
+
+// .search {
+//   height: 2rem;
+//   padding-left: 2.5rem;
+//   border: none;
+//   background-color: transparent;
+//   color: white;
+//   width: 0;
+//   transition: width 0.2s ease-out;
+// }
+
+// .search:focus {
+//   width: 15rem;
+// }
+
+// img {
+//   position: absolute;
+//   left: 0.5rem;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   cursor: pointer;
+//   z-index: 1;
+// }
+
+// @media only screen and (max-width: 768px) {
+//   .link {
+//     font-size: 1.2rem;
+//   }
+
+//   .search {
+//     padding-left: 2rem;
+//   }
+// }
 </style>

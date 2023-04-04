@@ -4,7 +4,7 @@
   <div v-else>
     <TvShowsCarouselByGenre
       @imageIsClicked="showModal"
-      v-for="genre in genres"
+      v-for="genre in allGenres"
       :key="genre"
       :title="genre"
       :tvShows="tvShowsByGenre(genre)"
@@ -32,21 +32,21 @@ export default {
   },
   data() {
     return {
-      genres: [
-        "drama",
-        "music",
-        "science-fiction",
-        "thriller",
-        "action",
-        "crime",
-        "horror",
-        "romance",
-        "adventure",
-        "espionage",
-        "mystery",
-        "supernatural",
-        "fantasy",
-      ],
+      //   genres: [
+      //     "drama",
+      //     "music",
+      //     "science-fiction",
+      //     "thriller",
+      //     "action",
+      //     "crime",
+      //     "horror",
+      //     "romance",
+      //     "adventure",
+      //     "espionage",
+      //     "mystery",
+      //     "supernatural",
+      //     "fantasy",
+      //   ],
       tvShow: {},
       //tvShows: [],
       isLoaded: false,
@@ -61,11 +61,19 @@ export default {
     ...mapState({
       tvShows: (state) => state.TvShow.tvShows,
     }),
+    allGenres() {
+      return this.tvShows.reduce((allGenres, show) => {
+        for (const genre of show.genres) {
+          allGenres.add(genre);
+        }
+        return allGenres;
+      }, new Set());
+    },
     tvShowsByGenre() {
       return (genre) => {
         return this.tvShows
           .filter((tvShow) => {
-            return tvShow.genres.some((gr) => gr.toLowerCase().includes(genre));
+            return tvShow.genres.some((gr) => gr.includes(genre));
           })
           .sort(
             (tvShow1, tvShow2) =>

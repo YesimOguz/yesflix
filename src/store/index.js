@@ -1,6 +1,7 @@
 //import {createStore} from 'vuex'
 //import Auth from './modules/auth';
  import TvShow from './modules/tvShow';
+ import Auth from './modules/auth';
 
 // const store = createStore({
 //    modules: {
@@ -17,7 +18,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        TvShow
+        TvShow,
+        Auth
     }
 })
 

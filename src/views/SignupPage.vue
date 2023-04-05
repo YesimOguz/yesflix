@@ -66,18 +66,6 @@ export default {
           });
       }
     },
-    // async register() {
-    //   if (!this.isDisabled) {
-    //     try {
-    //       this.isDisabled = true;
-    //       await this.$store.dispatch("register", this.registerForm);
-    //     } catch (e) {
-    //       console.log(e);
-    //     }finally{
-
-    //     }
-    //   }
-    // },
   },
 };
 </script>
@@ -105,8 +93,6 @@ form {
 
 form.register {
   color: #fff;
-  //background-color: #b38bbb;
-  //background-image: linear-gradient(to bottom right, #b38bbb 0%, #453c46 100%);
 
   @media only screen and (max-width: 768px) {
     max-width: none;

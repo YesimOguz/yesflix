@@ -43,15 +43,9 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
 export default {
   name: "DetailsModal",
   props: { tvShow: { type: Object } },
-  //   computed: {
-  //     ...mapState({
-  //       tvShow: (state) => state.TvShow.tvShow,
-  //     }),
-  //   },
   methods: {
     close() {
       this.$emit("close");

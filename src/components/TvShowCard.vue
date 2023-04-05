@@ -39,8 +39,6 @@ export default {
   },
   methods: {
     clickImage(tvShow) {
-      console.log("emitting");
-      //this.$store.dispatch("getTvShow", tvShow.id);
       this.$emit("clickedImage", tvShow);
     },
   },
@@ -54,7 +52,6 @@ export default {
   left: 0;
 }
 .star-rating {
-  //position: absolute;
   bottom: 0;
   left: 0;
   padding: 0.5rem;

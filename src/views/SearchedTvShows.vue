@@ -37,9 +37,6 @@ export default {
       searchedTvShows: (state) => state.TvShow.searchedTvShows,
     }),
   },
-  created() {
-    console.log("zzz", this.searchedTvShows);
-  },
   methods: {
     showModal(tvShow) {
       this.isModalVisible = true;
@@ -62,9 +59,6 @@ $small-screen: 576px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  //margin: 0 auto;
-  //gap: 60px;
-  //margin: 30px 0;
 
   .tvShow {
     padding: 80px;

@@ -10,9 +10,6 @@
     >
       <slide v-for="(tvShow, i) in tvShows" :index="i" :key="tvShow.id">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-          <!-- <router-link
-            :to="{ name: 'tvShowDetails', params: { id: tvShow.id } }"
-          > -->
           <TvShowCard
             :tvShow="tvShow"
             :classForCarousel="{
@@ -23,7 +20,6 @@
             :dataIndex="index"
             @clickedImage="imageClicked(tvShow)"
           />
-          <!-- </router-link> -->
         </template>
       </slide>
     </carousel-3d>
@@ -32,16 +28,9 @@
 
 <script>
 import TvShowCard from "../components/TvShowCard.vue";
-//import VueStarRating from "vue-star-rating";
-//import DetailsModal from "./DetailsModal.vue";
 
 export default {
   components: { TvShowCard },
-  // data() {
-  //   return {
-  //     isModalVisible: false,
-  //   };
-  // },
   props: {
     tvShows: { type: Array, default: () => [] },
     title: { type: String },
@@ -51,13 +40,6 @@ export default {
       this.$emit("imageIsClicked", tvShow);
     },
   },
-
-  // showModal() {
-  //   this.isModalVisible = true;
-  // },
-  // closeModal() {
-  //   this.isModalVisible = false;
-  // },
 };
 </script>
 

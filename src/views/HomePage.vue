@@ -19,7 +19,6 @@
 
 <script>
 import SearchLoader from "../components/SearchLoader.vue";
-//import api from "../../api";
 import TvShowsCarouselByGenre from "../components/TvShowsCarouselByGenre.vue";
 import DetailsModal from "../components/DetailsModal.vue";
 import { mapState } from "vuex";
@@ -33,13 +32,11 @@ export default {
   data() {
     return {
       tvShow: {},
-      //tvShows: [],
       isLoaded: false,
       isModalVisible: false,
     };
   },
   mounted() {
-    console.log("i am here");
     this.getTvShowsByGenres();
   },
   computed: {
@@ -66,18 +63,6 @@ export default {
           );
       };
     },
-    // tvShowsByGenre() {
-    //   return (genre) => {
-    //     return this.tvShows.filter((tvShow) => {
-    //       return tvShow.genres
-    //         .some((gr) => gr.toLowerCase().includes(genre))
-    //         .sort(
-    //           (tvShow1, tvShow2) =>
-    //             tvShow1.rating.average - tvShow2.rating.average
-    //         );
-    //     });
-    //   };
-    // },
   },
   methods: {
     getTvShowsByGenres() {
@@ -94,18 +79,11 @@ export default {
         });
     },
     showModal(tvShow) {
-      console.log("xxx");
       this.isModalVisible = true;
       this.tvShow = tvShow;
-      // this.$router.push({
-      //   query: { id: tvShow.id },
-      // });
     },
     closeModal() {
       this.isModalVisible = false;
-      // this.$router.push({
-      //   query: {},
-      // });
     },
   },
 };

@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       search: "",
-      isSearchOpen: false,
     };
   },
   watch: {
@@ -38,7 +37,12 @@ export default {
       clearTimeout(this.searchTimer);
       if (this.search) {
         this.searchTimer = setTimeout(() => {
-          this.$store.dispatch("searchTvShows", this.search);
+          this.$store.dispatch("searchTvShows", this.search).catch(() => {
+            this.$notify({
+              type: "error",
+              text: "Something went wrong!",
+            });
+          });
           this.$router.push({
             name: "searchedTvShows",
             params: { name: this.search },
@@ -51,13 +55,16 @@ export default {
       }
     },
   },
-  // mounted() {
-  //   this.searchOnMount();
-  // },
   mounted() {
     if (this.$route.params.name) {
-      //this.search = this.$route.params.name;
-      this.$store.dispatch("searchTvShows", this.$route.params.name);
+      this.$store
+        .dispatch("searchTvShows", this.$route.params.name)
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: "Something went wrong!",
+          });
+        });
     }
   },
   computed: {
@@ -67,28 +74,9 @@ export default {
   },
   methods: {
     toggleSearch() {
-      this.isSearchOpen = !this.isSearchOpen;
       const searchInput = this.$el.querySelector(".search");
-      if (this.isSearchOpen) {
-        searchInput.focus();
-      } else {
-        searchInput.blur();
-      }
+      searchInput.focus();
     },
-    // searchOnMount() {
-    //   const { name } = this.$route.params;
-    //   if (name) {
-    //     this.search = name;
-    //     this.$store.dispatch("searchTvShows", name);
-    //   }
-    // },
-    // beforeRouteLeave(to, from, next) {
-    //   // Reset the search input when the user navigates away from the search results page.
-    //   if (from.name === "searchedTvShows" && to.name === "tvShows") {
-    //     this.search = "";
-    //   }
-    //   next();
-    // },
   },
 };
 </script>
@@ -151,7 +139,6 @@ img {
   font-weight: bold;
   cursor: pointer;
 
-  // Hover styles
   &:hover {
     color: #ff0000;
   }
@@ -169,7 +156,7 @@ img {
   .search {
     padding-left: 2rem;
     width: 15rem;
-    transition: none; // remove transition effect on smaller screens
+    transition: none;
   }
 
   img {

@@ -20,32 +20,32 @@ describe("HomePage.vue", () => {
 
   beforeEach(() => {
     state = {
-        TvShow:{
-            tvShows:[]
-          }
+      TvShow: {
+        tvShows: [],
+      },
     };
-
+  
     actions = {
       getTvShows: jest.fn(),
     };
-
+  
     store = new Vuex.Store({
       state,
       actions,
     });
+  
     wrapper = mount(HomePage, {
-        localVue,
-        store,
-        stubs: {
-          TvShowsCarouselByGenre: true,
-          DetailsModal: true,
-          SearchLoader: true,
-        },
-      });
+      localVue,
+      store,
+      stubs: {
+        TvShowsCarouselByGenre: true,
+        DetailsModal: true,
+        SearchLoader: true,
+      },
+    });
   });
-
+  
   it("dispatches the 'getTvShows' action when mounted", async() => {
-
     await wrapper.vm.$nextTick()
     expect(actions.getTvShows).toHaveBeenCalled();
   });

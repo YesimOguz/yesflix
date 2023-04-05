@@ -1,7 +1,6 @@
 /* global describe, test, expect, beforeEach, jest */
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-
 import NavBar from "../../../src/components/NavBar.vue";
 
 const localVue = createLocalVue();
@@ -32,16 +31,16 @@ describe("NavBar.vue", () => {
     });
 
     wrapper = shallowMount(NavBar, {
-        mocks: {
-          $router: {
-              push: jest.fn(),
-            },
-          $route: {params:{name:''},name:''},
+      mocks: {
+        $router: {
+          push: jest.fn(),
         },
-        stubs: ['router-link', 'router-view'],
-        store, localVue
-      });
-  
+        $route: { params:{name:''}, name:'' },
+      },
+      stubs: ['router-link', 'router-view'],
+      store,
+      localVue
+    });
   });
 
   test("Search works correctly after input change", async () => {
@@ -50,31 +49,16 @@ describe("NavBar.vue", () => {
     input.element.value = show;
     input.trigger("input");
 
-    // Wait for the debounce time
     await new Promise((resolve) => setTimeout(resolve, 1001));
 
     expect(actions.searchTvShows).toHaveBeenCalled();
     expect(actions.searchTvShows).toHaveBeenCalledWith(expect.any(Object), show);
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
-    name: 'searchedTvShows',
-    params: { name: show },
+      name: 'searchedTvShows',
+      params: { name: show },
+    });
   });
-  });
-
-//   test("Toggle search input focus", () => {
-    
-//     const searchIcon = wrapper.find("img");
-//     const input = wrapper.find(".search");
-
-//     searchIcon.trigger("click");
-//     expect(wrapper.vm.isSearchOpen).toBe(true);
-//     //expect(input.element).toBe(document.activeElement);
-
-//     searchIcon.trigger("click");
-//     expect(wrapper.vm.isSearchOpen).toBe(false);
-//     expect(input.element).not.toBe(document.activeElement);
-//   });
 
   test("Logout button is visible when user is logged in", () => {
     const logoutButton = wrapper.find(".logout");
@@ -83,7 +67,6 @@ describe("NavBar.vue", () => {
 
   test("Logout button triggers logout action when clicked", () => {
     const logoutButton = wrapper.find(".logout");
-
     logoutButton.trigger("click");
     expect(actions.logout).toHaveBeenCalled();
   });

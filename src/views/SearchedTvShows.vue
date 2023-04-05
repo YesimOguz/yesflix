@@ -1,5 +1,9 @@
 <template>
-  <div class="tvShows">
+  <SearchLoader v-if="!searchedTvShows" />
+  <div v-else-if="!searchedTvShows.length" class="notFound">
+    No Tv Shows found!
+  </div>
+  <div v-else class="tvShows">
     <div
       v-for="tvShow in searchedTvShows"
       :key="tvShow.show.id"
@@ -23,9 +27,10 @@
 import { mapState } from "vuex";
 import TvShowCard from "../components/TvShowCard.vue";
 import DetailsModal from "../components/DetailsModal.vue";
+import SearchLoader from "../components/SearchLoader.vue";
 
 export default {
-  components: { TvShowCard, DetailsModal },
+  components: { TvShowCard, DetailsModal, SearchLoader },
   data() {
     return {
       isModalVisible: false,
@@ -53,6 +58,10 @@ export default {
 $large-screen: 1024px;
 $medium-screen: 768px;
 $small-screen: 576px;
+
+.notFound {
+  color: #fff;
+}
 
 .tvShows {
   display: flex;

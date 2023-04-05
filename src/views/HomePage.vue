@@ -1,6 +1,6 @@
 <template>
   <SearchLoader v-if="!isLoaded" />
-  <div v-else-if="!tvShows.length">No Tv Shows found!</div>
+  <div v-else-if="!tvShows.length" class="notFound">No Tv Shows found!</div>
   <div v-else>
     <TvShowsCarouselByGenre
       @imageIsClicked="showModal"

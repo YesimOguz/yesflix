@@ -32,21 +32,6 @@ export default {
   },
   data() {
     return {
-      //   genres: [
-      //     "drama",
-      //     "music",
-      //     "science-fiction",
-      //     "thriller",
-      //     "action",
-      //     "crime",
-      //     "horror",
-      //     "romance",
-      //     "adventure",
-      //     "espionage",
-      //     "mystery",
-      //     "supernatural",
-      //     "fantasy",
-      //   ],
       tvShow: {},
       //tvShows: [],
       isLoaded: false,

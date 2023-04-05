@@ -40,7 +40,7 @@ export default {
   methods: {
     clickImage(tvShow) {
       console.log("emitting");
-      this.$store.dispatch("getTvShow", tvShow.id);
+      //this.$store.dispatch("getTvShow", tvShow.id);
       this.$emit("clickedImage", tvShow);
     },
   },

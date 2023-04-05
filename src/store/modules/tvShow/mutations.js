@@ -1,6 +1,6 @@
 export default {
-    setSearchedTvShow(state, searchedTvShow){
-        state.searchedTvShow = searchedTvShow
+    setSearchedTvShows(state, searchedTvShows){
+        state.searchedTvShows = searchedTvShows
     },
     setTvShows(state, tvShows){
         state.tvShows = tvShows

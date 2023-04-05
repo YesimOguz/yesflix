@@ -1,7 +1,15 @@
 <template>
   <div class="tvShows">
-    <div v-for="tvShow in searchedTvShow" :key="tvShow.show.id" class="tvShow">
-      <TvShowCard @clickedImage="showModal" :tvShow="tvShow.show" />
+    <div
+      v-for="tvShow in searchedTvShows"
+      :key="tvShow.show.id"
+      :class="[tvShow.show.image !== null ? 'tvShow' : 'noTvShow']"
+    >
+      <TvShowCard
+        v-if="tvShow.show.image !== null"
+        @clickedImage="showModal"
+        :tvShow="tvShow.show"
+      />
     </div>
     <DetailsModal
       v-show="isModalVisible"
@@ -15,6 +23,7 @@
 import { mapState } from "vuex";
 import TvShowCard from "../components/TvShowCard.vue";
 import DetailsModal from "../components/DetailsModal.vue";
+
 export default {
   components: { TvShowCard, DetailsModal },
   data() {
@@ -25,11 +34,11 @@ export default {
   },
   computed: {
     ...mapState({
-      searchedTvShow: (state) => state.TvShow.searchedTvShow,
+      searchedTvShows: (state) => state.TvShow.searchedTvShows,
     }),
   },
   created() {
-    console.log("zzz", this.searchedTvShow);
+    console.log("zzz", this.searchedTvShows);
   },
   methods: {
     showModal(tvShow) {
@@ -53,26 +62,17 @@ $small-screen: 576px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  margin: 0 auto;
+  //margin: 0 auto;
   //gap: 60px;
-  margin: 30px 0;
+  //margin: 30px 0;
 
   .tvShow {
-    width: 100%;
     padding: 80px;
     box-sizing: border-box;
-
-    @media (min-width: $small-screen) {
-      width: calc(100% / 2);
-    }
-
-    @media (min-width: $medium-screen) {
-      width: calc(100% / 3);
-    }
-
-    @media (min-width: $large-screen) {
-      width: calc(100% / 4);
-    }
+  }
+  .noTvShow {
+    width: 0;
+    height: 0;
   }
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop">
+    <div class="modal-backdrop" @click="close">
       <div
         class="modal"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
+        @click.stop
       >
         <button
           type="button"
@@ -20,7 +21,7 @@
           <div class="img-container">
             <img
               v-if="tvShow.image"
-              :src="tvShow.image.original"
+              :src="tvShow.image.medium"
               class="img"
               :alt="tvShow.name"
             />
@@ -29,7 +30,7 @@
           <div v-if="tvShow && tvShow.rating" class="tv-content">
             <h2 class="tv-title">{{ tvShow.name }}</h2>
             <p class="tv-rating">{{ tvShow.rating.average }}/10</p>
-            <p class="tv-summary">{{ tvShow.summary }}</p>
+            <div class="tv-summary" v-html="tvShow.summary"></div>
             <p class="tv-info">Language: {{ tvShow.language }}</p>
             <p class="tv-info">Genres: {{ tvShow.genres.join(", ") }}</p>
             <p class="tv-info">Status: {{ tvShow.status }}</p>
@@ -74,15 +75,16 @@ export default {
 }
 
 .modal {
-  background: #302d2d;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
+  background-color: rgba(69, 69, 69, 0.95);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   max-width: 90%;
   max-height: 90%;
   padding: 2rem;
   position: relative;
+  border-radius: 5px;
 }
 
 .btn-close {
@@ -91,7 +93,7 @@ export default {
   right: 1rem;
   background-color: transparent;
   border: none;
-  color: white;
+  color: #737373;
   font-size: 1.5rem;
   cursor: pointer;
   outline: none;
@@ -99,28 +101,40 @@ export default {
 
 .tv-details {
   display: flex;
+  justify-content: space-between;
   align-items: flex-start;
-  justify-content: center;
   padding-top: 2rem;
 }
 
 .img-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 50%;
+  width: 40%;
   margin-right: 2rem;
 }
 
 .img {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
 }
 
 .tv-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  width: 60%;
+}
+
+@media screen and (max-width: 767px) {
+  .tv-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img-container {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .tv-content {
+    width: 100%;
+  }
 }
 
 .tv-title {
@@ -128,24 +142,29 @@ export default {
   font-weight: bold;
   text-align: left;
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .tv-rating {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: left;
   margin-bottom: 1rem;
+  color: #d6d6d6;
 }
 
 .tv-summary {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: justify;
   margin-bottom: 1rem;
+  color: #ffffff;
+  line-height: 1.5;
 }
 
 .tv-info {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: left;
   margin-bottom: 1rem;
+  color: #d6d6d6;
 }
 
 @media screen and (min-width: 768px) {

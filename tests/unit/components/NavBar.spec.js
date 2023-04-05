@@ -23,7 +23,7 @@ describe("NavBar.vue", () => {
         user: {},
       },
       TvShow:{
-        searchedTvShow:[]
+        searchedTvShows:[]
       }
     };
     store = new Vuex.Store({
@@ -36,7 +36,7 @@ describe("NavBar.vue", () => {
           $router: {
               push: jest.fn(),
             },
-          $route: {  },
+          $route: {params:{name:''},name:''},
         },
         stubs: ['router-link', 'router-view'],
         store, localVue

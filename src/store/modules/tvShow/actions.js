@@ -16,7 +16,7 @@ export default {
     searchTvShows({ commit }, query) {
         api.get(`search/shows?q=${query}`)
            .then((response) => {
-             commit('setSearchedTvShow', response.data)
+             commit('setSearchedTvShows', response.data)
             })
     },
 };

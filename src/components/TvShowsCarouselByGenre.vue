@@ -73,7 +73,7 @@ export default {
     }
   }
   .carousel-3d-slide {
-    background-color: black;
+    background-color: #000000;
   }
 }
 </style>

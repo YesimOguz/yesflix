@@ -44,8 +44,21 @@ export default {
             params: { name: this.search },
           });
         }, 1000);
+      } else {
+        this.$router.push({
+          name: "tvShows",
+        });
       }
     },
+  },
+  // mounted() {
+  //   this.searchOnMount();
+  // },
+  mounted() {
+    if (this.$route.params.name) {
+      //this.search = this.$route.params.name;
+      this.$store.dispatch("searchTvShows", this.$route.params.name);
+    }
   },
   computed: {
     ...mapState({
@@ -62,6 +75,20 @@ export default {
         searchInput.blur();
       }
     },
+    // searchOnMount() {
+    //   const { name } = this.$route.params;
+    //   if (name) {
+    //     this.search = name;
+    //     this.$store.dispatch("searchTvShows", name);
+    //   }
+    // },
+    // beforeRouteLeave(to, from, next) {
+    //   // Reset the search input when the user navigates away from the search results page.
+    //   if (from.name === "searchedTvShows" && to.name === "tvShows") {
+    //     this.search = "";
+    //   }
+    //   next();
+    // },
   },
 };
 </script>
@@ -97,7 +124,7 @@ export default {
   padding-left: 2.5rem;
   border: none;
   background-color: transparent;
-  color: white;
+  color: #ffffff;
   width: 0;
   transition: width 0.2s ease-out;
 }
@@ -149,62 +176,4 @@ img {
     left: 1rem;
   }
 }
-
-// .header {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 1rem;
-//   color: #ffffff;
-//   position: relative;
-// }
-
-// .link {
-//   font-size: 1.5rem;
-//   font-weight: bold;
-//   text-decoration: none;
-//   color: #ff0000;
-// }
-
-// .search-logout {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .search-bar {
-//   position: relative;
-// }
-
-// .search {
-//   height: 2rem;
-//   padding-left: 2.5rem;
-//   border: none;
-//   background-color: transparent;
-//   color: white;
-//   width: 0;
-//   transition: width 0.2s ease-out;
-// }
-
-// .search:focus {
-//   width: 15rem;
-// }
-
-// img {
-//   position: absolute;
-//   left: 0.5rem;
-//   top: 50%;
-//   transform: translateY(-50%);
-//   cursor: pointer;
-//   z-index: 1;
-// }
-
-// @media only screen and (max-width: 768px) {
-//   .link {
-//     font-size: 1.2rem;
-//   }
-
-//   .search {
-//     padding-left: 2rem;
-//   }
-// }
 </style>

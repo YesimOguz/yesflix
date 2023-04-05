@@ -97,9 +97,15 @@ export default {
       console.log("xxx");
       this.isModalVisible = true;
       this.tvShow = tvShow;
+      // this.$router.push({
+      //   query: { id: tvShow.id },
+      // });
     },
     closeModal() {
       this.isModalVisible = false;
+      // this.$router.push({
+      //   query: {},
+      // });
     },
   },
 };

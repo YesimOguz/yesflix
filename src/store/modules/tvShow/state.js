@@ -1,5 +1,5 @@
 export default {
     tvShows: [],
     tvShow:{},
-    searchedTvShow: [],
+    searchedTvShows: [],
 }
